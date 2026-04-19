@@ -1,38 +1,38 @@
 import { useState } from "react";
-import Header from "@/components/Header";
-import Hero from "@/components/Hero";
-import Services from "@/components/Services";
-import Featured from "@/components/Featured";
-import RouteGenerator from "@/components/RouteGenerator";
-import Reviews from "@/components/Reviews";
-import AttractionMap from "@/components/AttractionMap";
-import Promo from "@/components/Promo";
-import Footer from "@/components/Footer";
-import ProfileModal from "@/components/ProfileModal";
-import ChatAssistant from "@/components/ChatAssistant";
+import AppShell from "@/components/ios/AppShell";
+import HomeScreen from "@/components/ios/HomeScreen";
+import ExploreScreen from "@/components/ios/ExploreScreen";
+import RoutesScreen from "@/components/ios/RoutesScreen";
+import MapScreen from "@/components/ios/MapScreen";
+import ProfileScreen from "@/components/ios/ProfileScreen";
+import ChatScreen from "@/components/ios/ChatScreen";
+
+type Tab = "home" | "explore" | "routes" | "map" | "profile";
 
 const Index = () => {
-  const [profileOpen, setProfileOpen] = useState(false);
+  const [activeTab, setActiveTab] = useState<Tab>("home");
   const [chatOpen, setChatOpen] = useState(false);
 
-  return (
-    <main className="min-h-screen">
-      <Header
-        onOpenProfile={() => setProfileOpen(true)}
-        onOpenChat={() => setChatOpen(true)}
-      />
-      <Hero />
-      <Services />
-      <Featured />
-      <RouteGenerator />
-      <AttractionMap />
-      <Reviews />
-      <Promo />
-      <Footer />
+  const renderScreen = () => {
+    if (chatOpen) return <ChatScreen />;
+    switch (activeTab) {
+      case "home":     return <HomeScreen onOpenChat={() => setChatOpen(true)} />;
+      case "explore":  return <ExploreScreen />;
+      case "routes":   return <RoutesScreen />;
+      case "map":      return <MapScreen />;
+      case "profile":  return <ProfileScreen />;
+    }
+  };
 
-      <ProfileModal open={profileOpen} onClose={() => setProfileOpen(false)} />
-      <ChatAssistant open={chatOpen} onClose={() => setChatOpen(false)} />
-    </main>
+  const handleTabChange = (tab: Tab) => {
+    setChatOpen(false);
+    setActiveTab(tab);
+  };
+
+  return (
+    <AppShell activeTab={chatOpen ? activeTab : activeTab} onTabChange={handleTabChange}>
+      {renderScreen()}
+    </AppShell>
   );
 };
 
