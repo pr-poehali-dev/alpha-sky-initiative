@@ -24,7 +24,7 @@ export default function Header({ className, onOpenProfile, onOpenChat }: HeaderP
   return (
     <header className={`absolute top-0 left-0 right-0 z-50 p-6 ${className ?? ""}`}>
       <div className="flex justify-between items-center">
-        <div className="text-white text-sm uppercase tracking-wide">WanderAll</div>
+        <div className="text-white text-base font-bold tracking-widest">ROAMIX</div>
         <nav className="flex gap-8 items-center">
           {/* Услуги с выпадающим меню */}
           <div className="relative">

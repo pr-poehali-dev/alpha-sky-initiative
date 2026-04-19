@@ -49,7 +49,7 @@ export default function Services() {
       <div className="max-w-6xl mx-auto">
         <p className="uppercase text-sm tracking-wide text-neutral-500 mb-4">Всё для поездки</p>
         <h2 className="text-4xl md:text-5xl font-bold text-neutral-900 mb-16 leading-tight max-w-xl">
-          Услуги WanderAll
+          Услуги Roamix
         </h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
           {services.map((service) => (
